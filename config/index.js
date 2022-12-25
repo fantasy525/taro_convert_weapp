@@ -1,6 +1,10 @@
+const path = require('path')
 const config = {
   projectName: 'taroConvert',
   date: '2022-12-20',
+  alias: {
+    '@/*': path.resolve(__dirname, '..', 'src/*')
+  },
   designWidth: 750,
   deviceRatio: {
     640: 2.34 / 2,

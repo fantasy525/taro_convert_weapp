@@ -1,0 +1,150 @@
+<view class="container">
+    <view class="page-body">
+        <poi-list></poi-list>
+        <form catchsubmit="formSubmit">
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">名称<text class="must-mark">*</text></text>
+                    <text class="example">示例：肯德基（开拓路店）、国贸大厦</text>
+                </view>
+                <input class="input" value="{{ form.name }}" data-field="name" bindinput="handleFormChange" />
+            </view>
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">地图位置<text class="must-mark">*</text></text>
+                    <text class="tips">位置有误将影响导航，请仔细核对</text>
+                </view>
+                <view class="position" bindtap="goMap">
+                    <input class="input" value="{{ form.point }}" disabled="{{true}}" placeholder="请从地图选择位置信息" />
+                    <image class="location-icon" src="../../images/location.png" />
+                </view>
+            </view>
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">地址<text class="must-mark">*</text></text>
+                    <text class="example">示例：北京市海淀区上地西路28号</text>
+                </view>
+                <input class="input" value="{{ form.address }}" data-field="address" bindinput="handleFormChange" />
+            </view>
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">门脸或招牌照片<text class="must-mark">*</text></text>
+                    <text class="tips">{{ pageType === 'edit' ? '修改' : '新增' }}地点需提供照片</text>
+                </view>
+                <view class="photos">
+                    <view class="photo-item" wx:for="{{form.photos}}" wx:key="index">
+                        <image class="photo" mode="aspectFill" src="{{item.tempFilePath}}" data-photo-url="{{item.tempFilePath}}" bindtap="previewPhoto"></image>
+                        <image class="delete" src="../../images/close.png" data-photo-index="{{index}}" bindtap="deletePhoto"></image>
+                    </view>
+                    <view class="photo-add" bindtap="addPhoto" wx-if="{{ form.photos.length < MaxPhotosLimit }}">
+                        <image class="carmera-icon" src="../../images/camera.png"></image>
+                    </view>
+                </view>
+            </view>
+
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">营业状态<text class="must-mark">*</text></text>
+                </view>
+                <radio-group class="radio-group radio-group-row" data-field="status" bindchange="handleFormChange">
+                    <label class="radio-group-item">
+                        <radio value="1" class="radio" />正常营业
+                    </label>
+                    <label class="radio-group-item">
+                        <radio value="3" class="radio" />暂停营业
+                    </label>
+                    <label class="radio-group-item" wx:if="{{ pageType === 'edit' }}">
+                        <radio value="2" class="radio" />永久停业
+                    </label>
+                </radio-group>
+            </view>
+
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">电话</text>
+                    <text class="example"></text>
+                </view>
+                <input class="input" data-field="phone" bindinput="handleFormChange" />
+            </view>
+            <!-- 行业 -->
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">行业<text class="must-mark">*</text></text>
+                    <text class="example"></text>
+                </view>
+                <picker data-field="type" bindchange="handleFormChange" range-key="value" value="{{index}}" range="{{type}}">
+                    <input class="input" value="{{originType[form.type]}}" />
+                </picker>
+            </view>
+            <view class="form-item">
+                <view class="form-label">
+                    <text class="title">营业时间</text>
+                    <text class="example">示例：淡季开门时间：周一至周五 09:00-17:00</text>
+                </view>
+                <view class="business-time">
+                    <!-- 自定义模式 -->
+                    <input class="input" wx-if="{{ form.shophourMode === BusinessTimeMode.Custom }}" data-field="shophour" bindinput="handleFormChange" />
+                    <!-- 标准模式 -->
+                    <view class="standard" wx-if="{{ form.shophourMode === BusinessTimeMode.Standard }}">
+                        <view class="picker-area" wx:for="{{form.shophourStandard}}" wx:key="id">
+                            <week-range-picker class="week" data-index="{{index}}" bindchange="bindWeekChange"></week-range-picker>
+                            <time-range-picker data-index="{{index}}" bindchange="bindTimeChange"></time-range-picker>
+                            <image class="delete-icon" src="../../images/delete.png" data-index="{{index}}" bindtap="deleteShophour"></image>
+                        </view>
+                        <view class="period-add">
+                            <image class="add-icon" src="../../images/add.png"></image>
+                            <text class="add-text" bindtap="addShophour">添加时间段</text>
+                        </view>
+                    </view>
+                    <view class="mode" bindtap="switchBusinessTimeMode">
+                        <image class="switch-icon" src="../../images/switch.png"></image>
+                        {{ form.shophourMode === BusinessTimeMode.Standard ? '自定义模式' : '标准模式' }}
+                    </view>
+                </view>
+            </view>
+
+   
+            <view class="form-item" wx:if="{{ form.type === 1 }}">
+                <view class="form-label">
+                    <text class="title">窗口数量</text>
+                </view>
+                <input class="input" type="number" data-field="winNumber" bindinput="handleFormChange" />
+            </view>
+
+
+            <view class="form-item" wx:if="{{ form.type === 1 }}">
+                <view class="form-label">
+                    <text class="title">排队情况</text>
+                </view>
+                <radio-group class="radio-group radio-group-column" data-field="busstate" bindchange="handleFormChange">
+                    <label class="radio-group-item">
+                        <radio value="1" class="radio" />人数较少（排10分钟）
+                    </label>
+                    <label class="radio-group-item">
+                        <radio value="2" class="radio" />人数适中（排20分钟）
+                    </label>
+                    <label class="radio-group-item">
+                        <radio value="3" class="radio" />人数较多（排30分钟）
+                    </label>
+                    <label class="radio-group-item">
+                        <radio value="0" class="radio" />休息了
+                    </label>
+                </radio-group>
+            </view>
+
+      
+            <view class="form-item" wx:if="{{ form.type === 1 }}">
+                <view class="form-label">
+                    <text class="title">提示</text>
+                </view>
+                <input class="input" data-field="tip" bindinput="handleFormChange" />
+            </view>
+
+     
+            <view class="btn-area">
+                <button class="submit" class="{{canSubmit?'submit-btn-active':'submit-btn-disabled'}}" formType="submit">提交</button>
+            </view>
+
+        </form>
+    </view>
+</view>

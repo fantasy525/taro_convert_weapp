@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "week-range-picker": "../weekRangePicker/index",
+        "time-range-picker": "../timeRangePicker/index"
+    },
+    "navigationBarTitleText": ""
+}

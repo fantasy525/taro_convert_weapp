@@ -1,0 +1,208 @@
+.page-body {
+    padding: 20rpx 40rpx 50rpx;
+    color: #2c2c2c;
+}
+.form-item {
+    margin-bottom: 10rpx;
+}
+.form-label {
+    display: flex;
+    flex-direction: row;
+    height: 80rpx;
+    line-height: 80rpx;
+    justify-content: space-between;
+}
+.form-label .title {
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.form-label .title .must-mark {
+    color: #d5523f;
+    margin-left: 8rpx;
+}
+.form-label .example {
+    font-size: 24rpx;
+    color: #7fade7;
+}
+.form-label .tips {
+    font-size: 24rpx;
+    color: #333;
+}
+
+/**
+ * Position Style
+ */
+.position {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.position .input {
+    flex: 1;
+}
+.position .location-icon {
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 10rpx;
+}
+
+/**
+ * 提交
+ */
+.submit {
+    width: 60%;
+    /* 不生效设置为行内样式 */
+    /* background: #7fade7; */
+    height: 78rpx;
+    line-height: 78rpx;
+    margin-top: 36rpx;
+}
+
+/**
+ * Photo Style
+ */
+.photos {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+.photo-item {
+    width: 200rpx;
+    height: 200rpx;
+    margin-right: 16rpx;
+    margin-bottom: 16rpx;
+    position: relative;
+}
+.photo-item .photo {
+    width: 200rpx;
+    height: 200rpx;
+}
+.photo-item .delete {
+    position: absolute;
+    right: -20rpx;
+    top: -20rpx;
+    width: 40rpx;
+    height: 40rpx;
+}
+.photo-add {
+    width: 200rpx;
+    height: 200rpx;
+    background: #EAEFFB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.photo-add .carmera-icon {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+/**
+ * 营业时间
+ */
+.business-time .mode {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    height: 30rpx;
+    font-size: 28rpx;
+    align-items: center;
+    padding: 20rpx 0 10rpx;
+    color: #666;
+}
+.business-time .mode .switch-icon {
+    height: 30rpx;
+    width: 30rpx;
+    margin-right: 10rpx;
+}
+.business-time .standard .picker-area {
+    display: flex;
+    flex-direction: row;
+    padding: 6rpx 0;
+}
+.business-time .standard .picker-area .week {
+    margin-right: 40rpx;
+}
+.business-time .standard .picker-area .delete-icon {
+    height: 36rpx;
+    width: 36rpx;
+    margin-left: 40rpx;
+}
+.business-time .period-add {
+    display: flex;
+    flex-direction: row;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding: 20rpx 0;
+    align-items: center;
+}
+.business-time .period-add .add-icon {
+    height: 30rpx;
+    width: 30rpx;
+}
+.business-time .period-add .add-text {
+    font-size: 28rpx;
+    padding: 0 10rpx;
+}
+
+
+/**
+ * Input Style
+ */
+.input {
+    border: 2rpx solid #ddd;
+    font-size: 28rpx;
+    padding: 10rpx 16rpx;
+}
+
+/**
+ * Radio Group Style
+ */
+.radio-group.radio-group-column {
+    display: flex;
+    flex-direction: column;
+}
+.radio-group.radio-group-column .radio-group-item {
+    margin-bottom: 20rpx;
+}
+.radio-group.radio-group-column .radio-group-item:last-child {
+    margin-bottom: 0;
+}
+.radio-group.radio-group-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.radio-group.radio-group-row  .radio-group-item {
+    margin-right: 30rpx;
+}
+.radio-group .radio-group-item {
+    height: 50rpx;
+    line-height: 50rpx;
+}
+.radio-group .wx-radio-input {
+    width: 28rpx;
+    height: 28rpx;
+    margin-top: -4rpx;
+}
+.radio-group .wx-radio-input.wx-radio-input-checked {
+    background: #fff;
+    border: 2rpx solid #1890ff;
+}
+.radio-group .wx-radio-input.wx-radio-input-checked::before {
+    content: '';
+    width: 22rpx;
+    height: 22rpx;
+    background: #1890ff;
+    border-radius: 50%;
+}
+.submit-btn-active{
+    background-color: #1890ff;
+    color:#fff;
+}
+.submit-btn-disabled{
+    background-color: #f5f5f5;
+    color:#00000040;
+    border-color: #d9d9d9;
+}
